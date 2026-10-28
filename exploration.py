@@ -36,3 +36,23 @@ print(
     "Répartition des prix des quantités négatives sans C :\n",
     negative_quantity_sans_c_df["UnitPrice"].value_counts(dropna=False)
 )
+
+# calculons le nompre des pris négatifs et nul dans notre jeu de données 
+print("\nPrix nuls: ", (df['UnitPrice']==0).sum())
+print("\nPrix négatifs: ", (df['UnitPrice']<0).sum())
+
+print("\nLinges avec des prix négatifs :")
+
+print(
+    df.loc[df['UnitPrice']<0, ['InvoiceNo', 'StockCode', 'Description', 'Quantity', 'UnitPrice']].to_string(index=False)
+)
+
+print("\nDescription des prix nuls : ")
+print(
+    df.loc[df["UnitPrice"] == 0, "Description"]
+    .value_counts(dropna=False)
+    .head(10)
+)
+
+#voir combien on de doublons sur notre jeu de donée : 
+print("\nNombre de doublons:", df.duplicated().sum())
