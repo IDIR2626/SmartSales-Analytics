@@ -56,3 +56,10 @@ print(
 
 #voir combien on de doublons sur notre jeu de donée : 
 print("\nNombre de doublons:", df.duplicated().sum())
+
+print("\nExemple de doublons exact: ")
+print(
+    df[df.duplicated(keep=False)]
+    .sort_values(['InvoiceNo', 'StockCode']) 
+    .head(10)
+)
