@@ -75,3 +75,22 @@ dates = pd.to_datetime(
 print("\nDates non convertibles:", dates.isna().sum()) 
 print("\nPremières date :", dates.min())
 print("\nDernière date :", dates.max())
+
+df["InvoiceDate"] = dates
+
+#première analyse : quantité de produits positifs avec prix positifs en éxluant les factures commancant par c 
+# c désigne les annulations de commandes 'cancelled' 
+
+ventes = df.loc[
+    (df['Quantity'] > 0) 
+    & (df['UnitPrice'] > 0) 
+    & (~df['InvoiceNo'].str.startswith('C'))
+].copy() 
+
+print("\nNombre de lignes de ventes valides: ", len(ventes))
+
+ventes["Montant"] = ventes["Quantity"] * ventes["UnitPrice"]
+total_ventes = ventes["Montant"].sum()
+
+print("\nTotal des ventes valides: ", total_ventes)
+
