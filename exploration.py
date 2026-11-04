@@ -94,3 +94,6 @@ total_ventes = ventes["Montant"].sum()
 
 print("\nTotal des ventes valides: ", total_ventes)
 
+nombre_commandes = ventes["InvoiceNo"].nunique()
+
+print("Nombre de commandes :", nombre_commandes) #une factures contenant plusieurs produits est considérée comme une seule commande
