@@ -58,8 +58,20 @@ print(
 print("\nNombre de doublons:", df.duplicated().sum())
 
 print("\nExemple de doublons exact: ")
+doublons = df[df.duplicated(keep=False)] 
+
 print(
-    df[df.duplicated(keep=False)]
-    .sort_values(['InvoiceNo', 'StockCode']) 
+    doublons.sort_values(['InvoiceNo', 'StockCode'])
     .head(10)
+    .to_string(index=False)
 )
+
+dates = pd.to_datetime(
+    df["InvoiceDate"],
+    format="%Y-%m-%d %H:%M:%S",
+    errors="coerce"
+)
+
+print("\nDates non convertibles:", dates.isna().sum()) 
+print("\nPremières date :", dates.min())
+print("\nDernière date :", dates.max())
