@@ -97,3 +97,12 @@ print("\nTotal des ventes valides: ", total_ventes)
 nombre_commandes = ventes["InvoiceNo"].nunique()
 
 print("Nombre de commandes :", nombre_commandes) #une factures contenant plusieurs produits est considérée comme une seule commande
+
+
+ventes_sans_doublons = ventes.drop_duplicates()
+total_sans_doublons = ventes_sans_doublons["Montant"].sum() 
+ecart = total_ventes - total_sans_doublons
+
+print("\nLinges en moins après suppression des doublons: ", len(ventes) - len(ventes_sans_doublons))
+print("\nTotal des ventes sans doublons: ", total_sans_doublons)
+print(f"\nÉcart: {ecart:,.2f}")
