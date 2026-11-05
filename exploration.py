@@ -106,3 +106,14 @@ ecart = total_ventes - total_sans_doublons
 print("\nLinges en moins après suppression des doublons: ", len(ventes) - len(ventes_sans_doublons))
 print("\nTotal des ventes sans doublons: ", total_sans_doublons)
 print(f"\nÉcart: {ecart:,.2f}")
+
+annulations = df.loc[
+    df["InvoiceNo"].astype(str).str.startswith("C", na=False)
+].copy()
+
+montant_annulations = (
+    annulations["Quantity"] * annulations["UnitPrice"]
+).sum()
+
+print(f"Montant des annulations : {montant_annulations:,.2f}")
+print("Nombre de factures annulées :", annulations["InvoiceNo"].nunique())
